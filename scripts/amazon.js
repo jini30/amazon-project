@@ -42,12 +42,12 @@ products.forEach((product) =>
 
                 <div class="product-spacer"></div>
 
-                <div class="added-to-cart">
+                <div class="added-to-cart js-added-to-cart-${product.id}">
                 <img src="images/icons/checkmark.png">
                 Added
                 </div>
 
-                <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${product.id}">
+                <button class="add-to-cart-button button-primary js-add-to-cart-button" data-product-id="${product.id}">
                 Add to Cart
                 </button>
             </div>
@@ -57,7 +57,9 @@ products.forEach((product) =>
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
-document.querySelectorAll('.js-add-to-cart').forEach((button) =>
+const addedMessageTimeouts = {};
+
+document.querySelectorAll('.js-add-to-cart-button').forEach((button) =>
     {
         button.addEventListener('click', () =>
             {
@@ -98,6 +100,25 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) =>
                 );
 
                 document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+                
+                const messageElement = document.querySelector(`.js-added-to-cart-${productId}`);
+                messageElement.classList.add('added');
+
+                setTimeout(() => 
+                    {
+                        const prevTimeoutId = addedMessageTimeouts[productId];
+                        if(prevTimeoutId)
+                        {
+                            clearTimeout(prevTimeoutId);
+                        }
+                        const timeoutId = setTimeout(() =>
+                            {
+                                messageElement.classList.remove('added');
+                            }
+                        , 2000);
+                        addedMessageTimeouts[productId] = timeoutId;
+                    }
+                , 2000);
             }
         )
     }
