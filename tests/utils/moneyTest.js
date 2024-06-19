@@ -19,6 +19,18 @@ describe('test suite: formatCurrency', () =>
                 expect(formatCurrency(2000.5)).toEqual('20.01');
             }
         );
+
+        it('rounds down to the nearest cent', () =>
+            {
+                expect(formatCurrency(2000.4)).toEqual('20.00');
+            }
+        );
+
+        it('check for negative numbers', () =>
+            {
+                expect(formatCurrency(-1035)).toEqual('-10.35');
+            }
+        );
     }
 );
 

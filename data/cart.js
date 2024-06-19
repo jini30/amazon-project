@@ -102,15 +102,20 @@ export function updateQuantity(productId, newQuantity)
 export function updateDeliveryOption(productId, deliveryOptionId)
 {
     let matchingItem;
-
+    let itemFound = false;
     cart.forEach((cartItem) =>
         {
             if(productId === cartItem.productId)
             {
+                itemFound = true;
                 matchingItem = cartItem;
             }
         }
     );
-    matchingItem.deliveryOptionId = deliveryOptionId;
-    saveToStorage();
+    const deliveryOptionExists = ['1', '2', '3'].includes(deliveryOptionId);
+    if(itemFound && deliveryOptionExists)
+    {
+        matchingItem.deliveryOptionId = deliveryOptionId;
+        saveToStorage();
+    }
 }
