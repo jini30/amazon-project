@@ -29,33 +29,25 @@ loadPage();
 //     }
 // );
 
-Promise.all(
-    [
-        new Promise((resolve) => 
-            {
-                loadProducts(() => 
-                    {
-                        resolve();
-                    }
-                );
-            }
-        ),
-        new Promise((resolve) => 
-            {
-                loadCart(() => 
-                    {
-                        resolve();
-                    }
-                );
-            }
-        )
-    ]
-).then(() => 
-    {
-        renderOrderSummary();
-        renderPaymentSummary();
-    }
-);
+// Promise.all(
+//     [
+//         loadProductsFetch(),
+//         new Promise((resolve) => 
+//             {
+//                 loadCart(() => 
+//                     {
+//                         resolve();
+//                     }
+//                 );
+//             }
+//         )
+//     ]
+// ).then(() => 
+//     {
+//         renderOrderSummary();
+//         renderPaymentSummary();
+//     }
+// );
 
 // new Promise((resolve) => 
 //     {
