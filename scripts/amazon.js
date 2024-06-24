@@ -1,4 +1,5 @@
-import {cart} from '../data/cart-class.js';
+// import {cart} from '../data/cart-class.js';
+import {addToCart, calculateCartQuantity} from '../data/cart.js';
 import {products, loadProducts} from '../data/products.js';
 
 loadProducts(renderProductsGrid);
@@ -70,7 +71,7 @@ function renderProductsGrid()
 
     function updateCartQuantity()
     {
-        let cartQuantity = cart.calculateCartQuantity();
+        let cartQuantity = calculateCartQuantity();
         document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
     }
 
@@ -106,7 +107,7 @@ function renderProductsGrid()
                     const productQuantityClass = `.js-quantity-selector-${productId}`;
                     const quantity = Number(document.querySelector(productQuantityClass).value);
                     
-                    cart.addToCart(productId, quantity);
+                    addToCart(productId, quantity);
 
                     updateCartQuantity();                
                     

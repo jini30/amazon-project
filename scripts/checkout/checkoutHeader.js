@@ -1,8 +1,9 @@
-import {cart} from "../../data/cart-class.js";
+// import {cart} from "../../data/cart-class.js";
+import {calculateCartQuantity} from "../../data/cart.js";
 
 export function renderCheckoutHeader()
 {
-  let cartQuantity = cart.calculateCartQuantity();
+  let cartQuantity = calculateCartQuantity();
   
   if(cartQuantity == 1)
   {
