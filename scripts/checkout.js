@@ -6,9 +6,17 @@ import {loadProducts, loadProductsFetch} from "../data/products.js";
 
 async function loadPage()
 {
-    await loadProductsFetch();
-    renderOrderSummary();
-    renderPaymentSummary();
+    try
+    {
+        //  throw 'error1';
+        await loadProductsFetch();
+        renderOrderSummary();
+        renderPaymentSummary();
+    }
+    catch(error)
+    {
+        console.log('error');
+    }
 }
 
 loadPage();
