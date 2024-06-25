@@ -9,8 +9,31 @@ function renderProductsGrid()
     let productsHTML = '';
 
     updateCartQuantity();
+    
+    const url = new URL(window.location.href);
+    const searchString = url.searchParams.get('search');
 
-    products.forEach((product) => 
+    let filteredProducts = products;
+
+    if(searchString)
+    {
+        filteredProducts = filteredProducts.filter((product) =>
+            {
+                let inKeywords = false;
+                product.keywords.forEach((keyword) => 
+                    {
+                        if(keyword.toLowerCase().includes(searchString.toLowerCase()))
+                        {
+                            inKeywords = true;
+                        }
+                    }
+                );
+                return product.name.toLowerCase().includes(searchString.toLowerCase()) || inKeywords;
+            }
+        );   
+    }
+
+    filteredProducts.forEach((product) => 
         {
             productsHTML += `
                 <div class="product-container">
@@ -114,6 +137,23 @@ function renderProductsGrid()
                     showAddedMessage(productId);
                 }
             )
+        }
+    );
+
+    document.querySelector('.js-search-button').addEventListener('click', () =>
+        {
+            const searchString = document.querySelector('.js-search-bar').value;
+            window.location.href = `amazon.html?search=${searchString}`;
+        }
+    );
+
+    document.querySelector('.js-search-button').addEventListener('keydown', (event) => 
+        {
+            if(event.key === 'Enter')
+            {
+                const searchString = document.querySelector('.js-search-bar').value;
+                window.location.href = `amazon.html?search=${searchString}`;
+            }
         }
     );
 }

@@ -70,7 +70,7 @@ export function renderPaymentSummary()
               },
               body: JSON.stringify(
                 {
-                  cart: cart.cartItems
+                  cart: cart
                 }
               )
             }
